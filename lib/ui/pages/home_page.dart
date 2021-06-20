@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:firebase_demo/business_logic/models/menu.dart';
 import 'package:firebase_demo/business_logic/viewmodels/cart_viewmodel.dart';
 import 'package:firebase_demo/business_logic/viewmodels/home_viewmodel.dart';
+import 'package:firebase_demo/ui/pages/checkout_page.dart';
 import 'package:firebase_demo/ui/widgets/menu_item.dart';
 import 'package:firebase_demo/ui/widgets/silver_appbar_delegate.dart';
 import 'package:flutter/cupertino.dart';
@@ -81,7 +82,12 @@ _buildBody(BuildContext context, HomeViewModel viewModel) {
                   borderRadius: BorderRadius.circular(8),
                   child: IconButton(
                     icon: Icon(Icons.shopping_cart),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CheckoutPage()),
+                      );
+                    },
                   ),
                 );
               }),
