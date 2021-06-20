@@ -2,7 +2,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_demo/business_logic/viewmodels/cart_viewmodel.dart';
 import 'package:firebase_demo/business_logic/viewmodels/home_viewmodel.dart';
-import 'package:firebase_demo/ui/pages/home_page.dart';
+import 'package:firebase_demo/ui/pages/error_page.dart';
+import 'package:firebase_demo/ui/pages/loading_page.dart';
+import 'package:firebase_demo/ui/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,12 +33,13 @@ class _AppState extends State<App> {
             ChangeNotifierProvider(create: (context) => CartViewModel()),
           ],
           child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: snapshot.hasError
-                  ? HomePage()
-                  : (snapshot.connectionState == ConnectionState.done
-                      ? HomePage()
-                      : HomePage())),
+            debugShowCheckedModeBanner: false,
+            home: snapshot.hasError
+                ? ErrorPage()
+                : (snapshot.connectionState == ConnectionState.done
+                    ? LoginPage()
+                    : LoadingPage()),
+          ),
         );
       },
     );

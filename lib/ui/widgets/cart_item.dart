@@ -74,6 +74,7 @@ class CartItem extends StatelessWidget {
               removeAction: () {
                 _cartViewModel.removeItem(dish);
               },
+              count: dish.count,
             ),
           ],
         ),

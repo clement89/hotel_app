@@ -12,8 +12,9 @@ class Dish {
   final int type;
   final String nextUrl;
   final List<Addon> addonCat;
+  int count = 0;
 
-  const Dish({
+  Dish({
     required this.id,
     required this.name,
     required this.image,

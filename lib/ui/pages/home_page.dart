@@ -68,15 +68,11 @@ _buildBody(BuildContext context, HomeViewModel viewModel) {
             backgroundColor: Colors.white,
             actions: [
               Consumer<CartViewModel>(builder: (context, viewModel, child) {
-                String count = '';
-                if (viewModel.cartItems.length > 0) {
-                  count = viewModel.cartItems.length.toString();
-                }
                 return Badge(
-                  showBadge: count == '' ? false : true,
+                  showBadge: viewModel.count == 0 ? false : true,
                   position: BadgePosition.topEnd(top: 3, end: 3),
-                  badgeContent:
-                      Text(count, style: TextStyle(color: Colors.white)),
+                  badgeContent: Text(viewModel.count.toString(),
+                      style: TextStyle(color: Colors.white)),
                   padding: EdgeInsets.all(6),
                   animationType: BadgeAnimationType.fade,
                   borderRadius: BorderRadius.circular(8),

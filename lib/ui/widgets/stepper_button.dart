@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 class StepperButton extends StatefulWidget {
   final Function addAction;
   final Function removeAction;
+  final int count;
   StepperButton({
     required this.addAction,
     required this.removeAction,
+    required this.count,
   });
 
   @override
@@ -15,6 +17,13 @@ class StepperButton extends StatefulWidget {
 
 class _StepperButtonState extends State<StepperButton> {
   int count = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    count = widget.count;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -96,6 +96,7 @@ class MenuItem extends StatelessWidget {
                         removeAction: () {
                           _cartViewModel.removeItem(dish);
                         },
+                        count: dish.count,
                       ),
                       SizedBox(height: 20),
                       dish.addonCat.isEmpty
