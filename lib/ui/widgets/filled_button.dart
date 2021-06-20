@@ -40,16 +40,18 @@ class FilledButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('images/$image'),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
+              image.isEmpty
+                  ? Container()
+                  : Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('images/$image'),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
               Text(
                 title,
                 style: TextStyle(

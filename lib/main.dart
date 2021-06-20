@@ -2,6 +2,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_demo/business_logic/viewmodels/cart_viewmodel.dart';
 import 'package:firebase_demo/business_logic/viewmodels/home_viewmodel.dart';
+import 'package:firebase_demo/business_logic/viewmodels/login_viewmodel.dart';
 import 'package:firebase_demo/ui/pages/error_page.dart';
 import 'package:firebase_demo/ui/pages/loading_page.dart';
 import 'package:firebase_demo/ui/pages/login_page.dart';
@@ -29,6 +30,7 @@ class _AppState extends State<App> {
       builder: (context, snapshot) {
         return MultiProvider(
           providers: [
+            ChangeNotifierProvider(create: (context) => LoginViewModel()),
             ChangeNotifierProvider(create: (context) => HomeViewModel()),
             ChangeNotifierProvider(create: (context) => CartViewModel()),
           ],

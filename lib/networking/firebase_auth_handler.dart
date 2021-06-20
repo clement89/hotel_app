@@ -13,8 +13,38 @@ class FirebaseAuthHandler {
   factory FirebaseAuthHandler() {
     return _instance;
   }
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> signInWithGoogle() async {
+    try {
+      UserCredential userCredential;
+
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
+      final googleAuthCredential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      userCredential = await _auth.signInWithCredential(googleAuthCredential);
+
+      final user = userCredential.user;
+      // Scaffold.of(context).showSnackBar(SnackBar(
+      //   content: Text('Sign In ${user.uid} with Google'),
+      // ));
+    } catch (e) {
+      print(e);
+      // Scaffold.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text('Failed to sign in with Google: $e'),
+      //   ),
+      // );
+    }
+  }
+
   bool isUserLoggedIn() {
-    if (FirebaseAuth.instance.currentUser == null) {
+    if (_auth.currentUser == null) {
       return false;
     } else {
       return true;
@@ -22,31 +52,13 @@ class FirebaseAuthHandler {
   }
 
   void listenAuthStateChanges() {
-    FirebaseAuth.instance.userChanges().listen((User? user) {
+    _auth.userChanges().listen((User? user) {
       if (user == null) {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
       }
     });
-  }
-
-  Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   Future<dynamic> logout() async {
