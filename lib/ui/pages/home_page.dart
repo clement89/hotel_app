@@ -57,18 +57,22 @@ _buildDrawer(BuildContext context) {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.black26,
-                  child: Icon(Icons.person),
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black26,
+                    child: Icon(Icons.person),
+                  ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Text(
                   userName,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 16,
                   ),
                 ),
               ],
