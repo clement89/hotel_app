@@ -83,7 +83,7 @@ class PhoneNumberPage extends StatelessWidget {
                         child: Row(
                           children: [
                             SizedBox(
-                              width: size.width * 0.3,
+                              width: size.width * 0.2,
                               child: TextButton(
                                 onPressed: () {
                                   print('show country picker..');
