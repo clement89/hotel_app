@@ -39,7 +39,9 @@ _buildDrawer(BuildContext context) {
     },
   );
 
-  String userName = FirebaseAuthHandler().user.uid;
+  String userName = FirebaseAuthHandler().isUserLoggedIn()
+      ? FirebaseAuthHandler().user.uid
+      : 'Clement Joseph';
   return Drawer(
     child: ListView(
       // Important: Remove any padding from the ListView.

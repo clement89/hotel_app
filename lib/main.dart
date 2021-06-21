@@ -43,8 +43,8 @@ class _AppState extends State<App> {
                 ? ErrorPage()
                 : (snapshot.connectionState == ConnectionState.done
                     ? FirebaseAuthHandler().isUserLoggedIn()
-                        ? LoginPage()
-                        : HomePage()
+                        ? HomePage()
+                        : LoginPage()
                     : LoadingPage()),
           ),
         );

@@ -77,6 +77,7 @@ class FirebaseAuthHandler {
   }
 
   bool isUserLoggedIn() {
+    print(_auth.currentUser);
     if (_auth.currentUser == null) {
       return false;
     } else {
