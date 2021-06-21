@@ -4,10 +4,13 @@ import 'package:firebase_demo/business_logic/viewmodels/cart_viewmodel.dart';
 import 'package:firebase_demo/business_logic/viewmodels/home_viewmodel.dart';
 import 'package:firebase_demo/business_logic/viewmodels/login_viewmodel.dart';
 import 'package:firebase_demo/ui/pages/error_page.dart';
+import 'package:firebase_demo/ui/pages/home_page.dart';
 import 'package:firebase_demo/ui/pages/loading_page.dart';
 import 'package:firebase_demo/ui/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'networking/firebase_auth_handler.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +42,9 @@ class _AppState extends State<App> {
             home: snapshot.hasError
                 ? ErrorPage()
                 : (snapshot.connectionState == ConnectionState.done
-                    ? LoginPage()
+                    ? FirebaseAuthHandler().isUserLoggedIn()
+                        ? LoginPage()
+                        : HomePage()
                     : LoadingPage()),
           ),
         );

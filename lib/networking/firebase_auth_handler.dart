@@ -47,7 +47,7 @@ class FirebaseAuthHandler {
       );
       user = (await _auth.signInWithCredential(credential)).user!;
 
-      print('Successfully signed in UID: ${user!.uid}');
+      print('Successfully signed in UID: ${user.uid}');
       return true;
     } catch (e) {
       print('Failed to sign in - $e');
@@ -55,7 +55,7 @@ class FirebaseAuthHandler {
     }
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     try {
       UserCredential userCredential;
 
@@ -69,8 +69,10 @@ class FirebaseAuthHandler {
       userCredential = await _auth.signInWithCredential(googleAuthCredential);
 
       user = userCredential.user!;
+      return true;
     } catch (e) {
       print(e);
+      return false;
     }
   }
 

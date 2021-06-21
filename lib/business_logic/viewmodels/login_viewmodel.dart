@@ -27,8 +27,9 @@ class LoginViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> signInWithGoogle() async {
-    await _authHandler.signInWithGoogle();
+  Future<bool> signInWithGoogle() async {
+    bool result = await _authHandler.signInWithGoogle();
+    return result;
   }
 
   void sendVerificationCode() {

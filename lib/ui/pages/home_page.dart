@@ -2,7 +2,9 @@ import 'package:badges/badges.dart';
 import 'package:firebase_demo/business_logic/models/menu.dart';
 import 'package:firebase_demo/business_logic/viewmodels/cart_viewmodel.dart';
 import 'package:firebase_demo/business_logic/viewmodels/home_viewmodel.dart';
+import 'package:firebase_demo/networking/firebase_auth_handler.dart';
 import 'package:firebase_demo/ui/pages/checkout_page.dart';
+import 'package:firebase_demo/ui/pages/login_page.dart';
 import 'package:firebase_demo/ui/widgets/menu_item.dart';
 import 'package:firebase_demo/ui/widgets/silver_appbar_delegate.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,6 +33,13 @@ class HomePage extends StatelessWidget {
 }
 
 _buildDrawer(BuildContext context) {
+  final PageRouteBuilder _loginRoute = new PageRouteBuilder(
+    pageBuilder: (BuildContext context, _, __) {
+      return LoginPage();
+    },
+  );
+
+  String userName = FirebaseAuthHandler().user.uid;
   return Drawer(
     child: ListView(
       // Important: Remove any padding from the ListView.
@@ -56,7 +65,7 @@ _buildDrawer(BuildContext context) {
                   height: 10,
                 ),
                 Text(
-                  'Clement Joseph',
+                  userName,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -70,10 +79,12 @@ _buildDrawer(BuildContext context) {
           leading: Icon(Icons.logout),
           title: Text('Logout'),
           onTap: () {
-            // Update the state of the app
-            // ...
-            // Then close the drawer
+            FirebaseAuthHandler().logout();
+
             Navigator.pop(context);
+
+            Navigator.pushAndRemoveUntil(
+                context, _loginRoute, (Route<dynamic> r) => false);
           },
         ),
       ],
