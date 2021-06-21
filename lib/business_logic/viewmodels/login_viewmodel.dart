@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 class LoginViewModel extends ChangeNotifier {
   final FirebaseAuthHandler _authHandler = FirebaseAuthHandler();
 
-  String countryCode = '';
+  String countryCode = '91';
   String phoneNumber = '';
   String phoneNumberError = '';
 
@@ -22,11 +22,22 @@ class LoginViewModel extends ChangeNotifier {
       notifyListeners();
       return false;
     } else {
+      sendVerificationCode();
       return true;
     }
   }
 
   Future<void> signInWithGoogle() async {
     await _authHandler.signInWithGoogle();
+  }
+
+  void sendVerificationCode() {
+    print('+$countryCode $phoneNumber');
+    _authHandler.verifyPhoneNumber('+$countryCode $phoneNumber');
+  }
+
+  Future<bool> verifyNumber(String code) async {
+    bool result = await _authHandler.verifyCode(code);
+    return result;
   }
 }

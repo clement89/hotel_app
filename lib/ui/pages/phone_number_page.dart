@@ -14,6 +14,19 @@ class PhoneNumberPage extends StatelessWidget {
     final _loginViewModel = Provider.of<LoginViewModel>(context, listen: false);
 
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_outlined,
+            color: Colors.black54,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Colors.white,
+      ),
       backgroundColor: Colors.white,
       body: GestureDetector(
         onTap: () {

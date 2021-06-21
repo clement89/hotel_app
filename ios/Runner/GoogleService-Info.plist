@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>559098832862-cdd1i1tndm1jjn18cs5j8s8mu4g7qjcn.apps.googleusercontent.com</string>
+	<string>559098832862-9es9osmqpq99v4ijrm60k43gt4rhldcr.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.559098832862-cdd1i1tndm1jjn18cs5j8s8mu4g7qjcn</string>
+	<string>com.googleusercontent.apps.559098832862-9es9osmqpq99v4ijrm60k43gt4rhldcr</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>559098832862-v1ui3vsr8phm0nkfr12br11f19mbc9t7.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBZw9qxfKK4kTdP8Dv6S6zp7VzpA8qq8Jk</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.firebaseDemo</string>
+	<string>com.affinitee.hoteldemo</string>
 	<key>PROJECT_ID</key>
 	<string>hotelapp-967d9</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:559098832862:ios:438983f794627456e25f4f</string>
+	<string>1:559098832862:ios:150079086aaf04d0e25f4f</string>
 </dict>
 </plist>

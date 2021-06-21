@@ -36,14 +36,39 @@ _buildDrawer(BuildContext context) {
       // Important: Remove any padding from the ListView.
       padding: EdgeInsets.zero,
       children: <Widget>[
-        DrawerHeader(
-          decoration: BoxDecoration(
-            color: Colors.blue,
+        ClipRRect(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(0),
+            bottom: Radius.circular(25),
           ),
-          child: Text('Drawer Header'),
+          child: DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.green,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.black26,
+                  child: Icon(Icons.person),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Clement Joseph',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
         ListTile(
-          title: Text('Item 1'),
+          leading: Icon(Icons.logout),
+          title: Text('Logout'),
           onTap: () {
             // Update the state of the app
             // ...

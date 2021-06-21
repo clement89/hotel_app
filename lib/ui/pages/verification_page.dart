@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:firebase_demo/business_logic/viewmodels/login_viewmodel.dart';
+import 'package:firebase_demo/ui/pages/home_page.dart';
 import 'package:firebase_demo/ui/widgets/filled_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
 
 class VerificationPage extends StatefulWidget {
   @override
@@ -18,6 +21,11 @@ class _VerificationPageState extends State<VerificationPage> {
   String currentText = "";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final formKey = GlobalKey<FormState>();
+  final PageRouteBuilder _homeRoute = new PageRouteBuilder(
+    pageBuilder: (BuildContext context, _, __) {
+      return HomePage();
+    },
+  );
 
   @override
   void initState() {
@@ -35,6 +43,7 @@ class _VerificationPageState extends State<VerificationPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final _loginViewModel = Provider.of<LoginViewModel>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -163,40 +172,21 @@ class _VerificationPageState extends State<VerificationPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 80),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: 'Resent OTP',
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                                decoration: TextDecoration.underline,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  print('Resent OTP');
-                                }),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
                 SizedBox(height: 30),
                 FilledButton(
                   title: 'Verify',
-                  onClickAction: () {},
+                  onClickAction: () async {
+                    bool result =
+                        await _loginViewModel.verifyNumber(_controller.text);
+                    if (result) {
+                      Navigator.pushAndRemoveUntil(
+                          context, _homeRoute, (Route<dynamic> r) => false);
+                    } else {
+                      final snackBar =
+                          SnackBar(content: Text('Something went wrong!'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  },
                   color: Colors.blue,
                   image: '',
                 ),

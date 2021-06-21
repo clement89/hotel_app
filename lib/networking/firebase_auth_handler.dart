@@ -15,6 +15,45 @@ class FirebaseAuthHandler {
   }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  late String _verificationId;
+  late User user;
+
+  // Example code of how to verify phone number
+  Future<void> verifyPhoneNumber(String number) async {
+    try {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: number,
+        verificationCompleted: (PhoneAuthCredential credential) {},
+        verificationFailed: (FirebaseAuthException e) {
+          if (e.code == 'invalid-phone-number') {
+            print('The provided phone number is not valid.');
+          }
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          _verificationId = verificationId;
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    } catch (e) {
+      print('Failed to Verify Phone Number: $e');
+    }
+  }
+
+  Future<bool> verifyCode(String code) async {
+    try {
+      final PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: _verificationId,
+        smsCode: code,
+      );
+      user = (await _auth.signInWithCredential(credential)).user!;
+
+      print('Successfully signed in UID: ${user!.uid}');
+      return true;
+    } catch (e) {
+      print('Failed to sign in - $e');
+      return false;
+    }
+  }
 
   Future<void> signInWithGoogle() async {
     try {
@@ -29,17 +68,9 @@ class FirebaseAuthHandler {
       );
       userCredential = await _auth.signInWithCredential(googleAuthCredential);
 
-      final user = userCredential.user;
-      // Scaffold.of(context).showSnackBar(SnackBar(
-      //   content: Text('Sign In ${user.uid} with Google'),
-      // ));
+      user = userCredential.user!;
     } catch (e) {
       print(e);
-      // Scaffold.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text('Failed to sign in with Google: $e'),
-      //   ),
-      // );
     }
   }
 

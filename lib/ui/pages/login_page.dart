@@ -1,4 +1,5 @@
 import 'package:firebase_demo/business_logic/viewmodels/login_viewmodel.dart';
+import 'package:firebase_demo/ui/pages/home_page.dart';
 import 'package:firebase_demo/ui/pages/phone_number_page.dart';
 import 'package:firebase_demo/ui/widgets/filled_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,12 +31,12 @@ class LoginPage extends StatelessWidget {
           FilledButton(
             title: 'Google',
             onClickAction: () {
-              _viewModel.signInWithGoogle();
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => LoginPage(),
-              //   ),
-              // );
+              // _viewModel.signInWithGoogle();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                ),
+              );
             },
             color: Colors.blue,
             image: 'google.png',
