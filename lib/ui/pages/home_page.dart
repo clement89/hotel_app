@@ -210,12 +210,14 @@ _buildError(String message) {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: double.infinity,
-          height: 40,
+        Center(
           child: Text(
             message,
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ],
